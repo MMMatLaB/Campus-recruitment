@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.IRoleManagerDao">
+
+    <select id="queryRole" resultType="com.example.demo.entities.RoleEntity" >
+        <!--查询操作-->
+        select idrole,rolename,createtime,status from role
+    </select>
+    <select id="likeRole" resultType="com.example.demo.entities.RoleEntity" >
+        select idrole,rolename,createtime,status from role where  idrole=#{idrole}
+    </select>
+    <!--添加操作-->
+    <insert id="addRole" >
+        insert into role(idrole,rolename,createtime,status) values(#{idrole},#{rolename},#{createtime},#{status})
+    </insert>
+
+    <delete id="delRole">
+        delete from role where idrole=#{idrole}
+    </delete>
+
+    <update id="updateRole">
+        update role set rolename=#{rolename},createtime=#{createtime},status=#{status} where idrole=#{idrole}
+    </update>
+
+</mapper>
+

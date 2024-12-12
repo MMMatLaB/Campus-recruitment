@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.IQuestionManagerDao">
+
+    <select id="queryLikeQuestionnaire" resultType="com.example.demo.entities.QuestionSelect" >
+        <!--查询操作-->
+        select idquestionnaire,fileName,intro,title,state,creattime,userName
+        from questionnaire,user
+        WHERE title LIKE CONCAT('%', #{keyword}, '%') and questionnaire.user_userID=user.userID
+    </select>
+    <select id="queryQuestionnaire" resultType="com.example.demo.entities.QuestionSelect" >
+        select idquestionnaire,fileName,intro,title,state,creattime,user.userName
+        from questionnaire,user
+        where questionnaire.user_userID=user.userID
+    </select>
+    <!--添加操作-->
+    <insert id="addQuestionnaire" >
+        insert into questionnaire(idquestionnaire,fileName,intro,title,state,creattime,user_userID)
+        values(#{idquestionnaire},#{fileName},#{intro},#{title},#{state},#{creattime},#{user_userID})
+    </insert>
+
+    <delete id="delQuestionnaire">
+        delete from questionnaire where idquestionnaire=#{id}
+    </delete>
+
+    <update id="updateQuestionnaire">
+        update questionnaire
+        set state=#{state}
+        where idquestionnaire=#{id}
+    </update>
+
+</mapper>
+

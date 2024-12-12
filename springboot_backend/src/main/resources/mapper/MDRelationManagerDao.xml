@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.IMDRelationManagerDao">
+
+    <select id="queryMDRelation" resultType="com.example.demo.entities.MDRelationName" >
+        <!--查询操作-->
+        select  major_has_direct.majormid, major_has_direct.directdirectID, major_has_direct.MDid,major.majorName,direct.directName
+        from major_has_direct,major,direct
+        where major_has_direct.majormid=major.mid and major_has_direct.directdirectID=direct.directID
+    </select>
+
+    <select id="queryMDRelationfrommajor" resultType="com.example.demo.entities.MDRelationName" >
+        <!--查询操作-->
+        select  major_has_direct.majormid, major_has_direct.directdirectID, major_has_direct.MDid,major.majorName,direct.directName
+        from major_has_direct,major,direct
+        where majormid=#{majorid} and major_has_direct.majormid=major.mid and major_has_direct.directdirectID=direct.directID
+    </select>
+
+    <select id="queryMDRelationfromdirect" resultType="com.example.demo.entities.MDRelationName" >
+        <!--查询操作-->
+        select  major_has_direct.majormid, major_has_direct.directdirectID, major_has_direct.MDid,major.majorName,direct.directName
+        from major_has_direct,major,direct
+        where directdirectID=#{directid} and major_has_direct.majormid=major.mid and major_has_direct.directdirectID=direct.directID
+    </select>
+
+    <select id="queryMDRelationfromboth" resultType="com.example.demo.entities.MDRelationName" >
+        <!--查询操作-->
+        select  major_has_direct.majormid, major_has_direct.directdirectID, major_has_direct.MDid,major.majorName,direct.directName
+        from major_has_direct,major,direct
+        where directdirectID=#{directid} and majormid=#{majorid} and major_has_direct.majormid=major.mid and major_has_direct.directdirectID=direct.directID
+    </select>
+
+
+
+    <!--添加操作-->
+    <insert id="addMDRelation" >
+        insert into major_has_direct(majormid,directdirectID,MDid) values(#{majormid},#{directdirectID},#{MDid})
+    </insert>
+
+    <delete id="delMDRelation" >
+        delete from major_has_direct where MDid=#{MDid}
+    </delete>
+
+<!--    <update id="updateMDRelation">
+        update major_has_direct set majormid=#{majormid},directdirectID=#{directdirectID} where MDid=#{MDid}
+    </update>-->
+
+    <select id="likeMDRelation" resultType="java.lang.String"  >
+        select MDid from major_has_direct where majormid=#{mid} and directdirectID=#{did}
+    </select>
+
+
+
+    <select id="fromMajor" resultType="java.lang.String"  >
+        select directdirectid from major_has_direct where majormid=#{mid}
+    </select>
+
+</mapper>
+

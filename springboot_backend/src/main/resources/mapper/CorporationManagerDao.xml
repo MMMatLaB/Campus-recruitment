@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.ICorporationDao">
+
+    <select id="queryCorporation" resultType="com.example.demo.entities.Corporation" >
+        <!--查询操作-->
+        select idcorporation,CorpName,capacity,domainn,BreifInfo from corporation where idcorporation>-1
+    </select>
+
+    <!--添加操作-->
+    <insert id="addCorporation" >
+        insert into corporation(idcorporation,CorpName,capacity,domainn,BreifInfo) values(#{idcorporation},#{CorpName},#{capacity},#{domainn},#{BreifInfo})
+    </insert>
+
+    <delete id="delCorporation">
+        delete from corporation where idcorporation=#{idcorporation}
+    </delete>
+
+    <update id="updateCorporation">
+        update corporation set idcorporation=#{idcorporation},CorpName=#{CorpName},capacity=#{capacity},domainn=#{domainn},BreifInfo=#{BreifInfo} where idcorporation=#{idcorporation}
+    </update>
+</mapper>
+

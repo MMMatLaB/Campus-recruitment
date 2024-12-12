@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.ICareerManagerDao">
+
+    <select id="queryCareer" resultType="com.example.demo.entities.Career" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select careerID,careerName,salarymin,educationlevel,workyear,careerInfo,workplace,corporationidcorporation,status,creatdtime,salarymax from career where corporationidcorporation=#{keyword}
+    </select>
+
+    <!--添加操作-->
+    <insert id="addCareer" >
+        insert into career(careerID,careerName,salarymin,educationlevel,workyear,careerInfo,workplace,corporationidcorporation,status,creatdtime,salarymax) values(#{careerID},#{careerName},#{salarymin},#{educationlevel},#{workyear},#{careerInfo},#{workplace},#{corporationidcorporation},#{status},#{creatdtime},#{salarymax})
+
+    </insert>
+
+    <delete id="delCareer">
+        delete from career where careerID=#{careerid}
+    </delete>
+
+    <delete id="delsuggestCareer">
+        delete from suggest_career where career_careerID1=#{careerid}
+    </delete>
+
+    <delete id="delstuCareer">
+        delete from stu_want_career where career_careerID1=#{careerid}
+    </delete>
+
+
+
+    <update id="updateCareer">
+        update career
+        set careerName = #{careerName},
+            salarymin = #{salarymin},
+            educationlevel = #{educationlevel},
+            workyear = #{workyear},
+            careerInfo = #{careerInfo},
+            workplace = #{workplace},
+            corporationidcorporation = #{corporationidcorporation},
+            status = #{status},
+            creatdtime = #{creatdtime},
+            salarymax=#{salarymax}
+        where careerID = #{careerID}
+    </update>
+</mapper>
+

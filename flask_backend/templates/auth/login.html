@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../static/login.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <title>职业能力大数据分析平台</title>
+</head>
+
+<body>
+
+    <div class="container" id="container">
+        <div class="form-container sign-up">
+            <form>
+                <h1>学校登录</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+{#                <input type="text" placeholder="用户名">#}
+                <input type="text" placeholder="工号">
+                <input type="password" placeholder="密码">
+                <button>登录</button>
+            </form>
+        </div>
+        <div class="form-container sign-in">
+            <form>
+                <h1>学生登录</h1>
+                <div class="social-icons">
+                    <a href="#" class="icon"><i class="fa-brands fa-google-plus-g"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-github"></i></a>
+                    <a href="#" class="icon"><i class="fa-brands fa-linkedin-in"></i></a>
+                </div>
+                <input type="text" placeholder="学号">
+                <input type="password" placeholder="密码">
+{#                <a href="#">忘记密码?</a>#}
+                <button>登录</button>
+            </form>
+        </div>
+        <div class="toggle-container">
+            <div class="toggle">
+                <div class="toggle-panel toggle-left">
+                    <h1>你好，教师</h1>
+                    <p>输入您的个人详细信息以使用所有网站功能</p>
+                    <button class="hidden" id="login">学生登录</button>
+                </div>
+                <div class="toggle-panel toggle-right">
+                    <h1>你好，学生</h1>
+                    <p>输入您的个人详细信息以使用所有网站功能</p>
+                    <button class="hidden" id="register">学校登录</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../static/login.js"></script>
+</body>
+
+</html>
