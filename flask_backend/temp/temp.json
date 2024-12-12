@@ -1,0 +1,226 @@
+{
+  "widgetList": [
+    {
+      "key": 49335,
+      "type": "table",
+      "category": "container",
+      "icon": "table",
+      "rows": [
+        {
+          "cols": [
+            {
+              "type": "table-cell",
+              "category": "container",
+              "icon": "table-cell",
+              "internal": true,
+              "widgetList": [],
+              "merged": false,
+              "options": {
+                "name": "table-cell-22718",
+                "cellWidth": "",
+                "cellHeight": "",
+                "colspan": 1,
+                "rowspan": 1,
+                "wordBreak": false,
+                "customClass": ""
+              },
+              "id": "table-cell-22718"
+            }
+          ],
+          "id": "table-row-106865",
+          "merged": false
+        }
+      ],
+      "options": {
+        "name": "table85869",
+        "hidden": false,
+        "customClass": []
+      },
+      "id": "table85869"
+    },
+    {
+      "key": 39965,
+      "type": "card",
+      "category": "container",
+      "icon": "card",
+      "widgetList": [],
+      "options": {
+        "name": "card72130",
+        "label": "card",
+        "hidden": false,
+        "folded": false,
+        "showFold": true,
+        "cardWidth": "100%",
+        "shadow": "never",
+        "customClass": ""
+      },
+      "id": "card72130"
+    },
+    {
+      "key": 35341,
+      "type": "textarea",
+      "icon": "textarea-field",
+      "formItemFlag": true,
+      "options": {
+        "name": "textarea106462",
+        "label": "textarea",
+        "labelAlign": "",
+        "rows": 3,
+        "defaultValue": "",
+        "placeholder": "",
+        "columnWidth": "200px",
+        "size": "",
+        "labelWidth": null,
+        "labelHidden": false,
+        "readonly": false,
+        "disabled": false,
+        "hidden": false,
+        "required": false,
+        "requiredHint": "",
+        "validation": "",
+        "validationHint": "",
+        "customClass": [],
+        "labelIconClass": null,
+        "labelIconPosition": "rear",
+        "labelTooltip": null,
+        "minLength": null,
+        "maxLength": null,
+        "showWordLimit": false,
+        "onCreated": "",
+        "onMounted": "",
+        "onInput": "",
+        "onChange": "",
+        "onFocus": "",
+        "onBlur": "",
+        "onValidate": ""
+      },
+      "id": "textarea106462"
+    },
+    {
+      "key": 105767,
+      "type": "checkbox",
+      "icon": "checkbox-field",
+      "formItemFlag": true,
+      "options": {
+        "name": "checkbox109177",
+        "label": "checkbox",
+        "labelAlign": "",
+        "defaultValue": [],
+        "columnWidth": "200px",
+        "size": "",
+        "displayStyle": "inline",
+        "buttonStyle": false,
+        "border": false,
+        "labelWidth": null,
+        "labelHidden": false,
+        "disabled": false,
+        "hidden": false,
+        "optionItems": [
+          {
+            "label": "check 1",
+            "value": 1
+          },
+          {
+            "label": "check 2",
+            "value": 2
+          },
+          {
+            "label": "check 3",
+            "value": 3
+          }
+        ],
+        "required": false,
+        "requiredHint": "",
+        "validation": "",
+        "validationHint": "",
+        "customClass": "",
+        "labelIconClass": null,
+        "labelIconPosition": "rear",
+        "labelTooltip": null,
+        "onCreated": "",
+        "onMounted": "",
+        "onChange": "",
+        "onValidate": ""
+      },
+      "id": "checkbox109177"
+    },
+    {
+      "key": 45239,
+      "type": "rate",
+      "icon": "rate-field",
+      "formItemFlag": true,
+      "options": {
+        "name": "rate27434",
+        "label": "rate",
+        "labelAlign": "",
+        "defaultValue": null,
+        "columnWidth": "200px",
+        "labelWidth": null,
+        "labelHidden": false,
+        "disabled": false,
+        "hidden": false,
+        "required": false,
+        "requiredHint": "",
+        "validation": "",
+        "validationHint": "",
+        "customClass": "",
+        "labelIconClass": null,
+        "labelIconPosition": "rear",
+        "labelTooltip": null,
+        "max": 5,
+        "lowThreshold": 2,
+        "highThreshold": 4,
+        "allowHalf": false,
+        "showText": false,
+        "showScore": false,
+        "onCreated": "",
+        "onMounted": "",
+        "onChange": "",
+        "onValidate": ""
+      },
+      "id": "rate27434"
+    },
+    {
+      "key": 24594,
+      "type": "button",
+      "icon": "button",
+      "formItemFlag": false,
+      "options": {
+        "name": "button112271",
+        "label": "button",
+        "columnWidth": "200px",
+        "size": "",
+        "displayStyle": "block",
+        "disabled": false,
+        "hidden": false,
+        "type": "",
+        "plain": false,
+        "round": false,
+        "circle": false,
+        "icon": null,
+        "customClass": "",
+        "onCreated": "",
+        "onMounted": "",
+        "onClick": ""
+      },
+      "id": "button112271"
+    }
+  ],
+  "formConfig": {
+    "modelName": "formData",
+    "refName": "vForm",
+    "rulesName": "rules",
+    "labelWidth": 80,
+    "labelPosition": "left",
+    "size": "",
+    "labelAlign": "label-left-align",
+    "cssCode": "",
+    "customClass": [],
+    "functions": "",
+    "layoutType": "PC",
+    "jsonVersion": 3,
+    "onFormCreated": "",
+    "onFormMounted": "",
+    "onFormDataChange": ""
+  }
+}

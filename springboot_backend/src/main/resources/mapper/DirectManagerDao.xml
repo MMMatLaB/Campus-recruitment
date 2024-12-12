@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.IDirectManagerDao">
+
+    <select id="queryDirect" resultType="com.example.demo.entities.DirectEntity" parameterType="java.lang.String">
+        <!--查询操作-->
+        select directID,directName from direct where directName LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="queryAllDirect" resultType="com.example.demo.entities.DirectEntity" >
+        <!--查询操作-->
+        select directID,directName from direct
+    </select>
+
+    <select id="queryFromMajor" resultType="com.example.demo.entities.DirectEntity" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select directID,directName from direct where directID=#{directdirectid}
+    </select>
+
+    <select id="queryBoth" resultType="com.example.demo.entities.DirectEntity" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select directID,directName from direct where directID=#{directdirectid} and directName LIKE CONCAT('%', #{keyword}, '%')
+    </select>
+
+    <select id="queryDirectSalary" resultType="com.example.demo.entities.DirectSalary" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select salary.salaryid,salary.salaryrange,direct_has_salary.num
+        from direct_has_salary,salary
+        where directID=#{directid}   and salary.salaryid=direct_has_salary.salaryid
+    </select>
+
+
+    <select id="queryDirectCapacity" resultType="com.example.demo.entities.DirectNumber" parameterType="java.lang.Integer" >
+        <!--查询操作-->
+        SELECT  place.placeName, SUM(place.number) AS directNumber
+        FROM direct, place
+        WHERE place.directdirectID = #{directdirectid} AND direct.directID = #{directdirectid} AND direct.directID = place.directdirectID
+        GROUP BY direct.directID, place.placeName
+    </select>
+
+    <select id="queryDirectIndustry" resultType="com.example.demo.entities.DirectIndustry" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select industryName AS industryName,number AS number
+        from direct_has_industry
+        where direct_directID=#{directid}
+        order by number desc
+        limit 15
+    </select>
+
+    <select id="queryDirectScale" resultType="com.example.demo.entities.DirectScale" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select scaledictID,number
+        from scale
+        where direct_directID=#{directid}
+    </select>
+
+    <select id="quertDirectCompany" resultType="com.example.demo.entities.DirectCompany" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select companyID,companyName,number
+        from company
+        where directdirectID=#{directid}
+        order by number desc
+        limit 10
+    </select>
+
+    <select id="queryDirectTag" resultType="com.example.demo.entities.DirectTag" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select tagID,tagName
+        from tag
+        where direct_directID=#{directid}
+    </select>
+<!--    <select id="queryDirectSalary" resultType="java.lang.Integer" parameterType="java.lang.Integer">-->
+<!--        SELECT direct_directID-->
+<!--        FROM direct_avgsalary-->
+<!--        WHERE Salary BETWEEN #{min} AND #{max};-->
+<!--    </select>-->
+    <!--添加操作-->
+    <insert id="addDirect" >
+        insert into direct(directID,directName) values(#{directid},#{directname})
+    </insert>
+
+    <delete id="delDirect">
+        delete from direct where directid=#{directid}
+    </delete>
+
+    <delete id="delDirectAvgSalary">
+        delete from direct_avgsalary where direct_directid=#{directid}
+    </delete>
+
+    <delete id="delDirectHasDirect">
+        delete from major_has_direct where directdirectID=#{directid}
+    </delete>
+
+    <delete id="delDirectHasIndustry">
+        delete from direct_has_industry where direct_directid=#{directid}
+    </delete>
+
+
+
+</mapper>
+

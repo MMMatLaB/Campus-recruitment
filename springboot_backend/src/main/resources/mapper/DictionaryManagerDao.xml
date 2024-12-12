@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.IDictionaryManagerDao">
+
+    <select id="queryDict" resultType="com.example.demo.entities.DictionaryEntity" >
+        <!--查询操作-->
+        select dictionaryid,dictType,dictValue from dictionary
+    </select>
+
+    <!--添加操作-->
+    <insert id="addDict" >
+        insert into dictionary(dictionaryid,dictType,dictValue) values(#{dictionaryid},#{dictType},#{dictValue})
+    </insert>
+
+    <delete id="delDict">
+        delete from dictionary where dictionaryid=#{dictionaryid}
+    </delete>
+
+    <update id="updateDict">
+        update dictionary set dictType=#{dictType},dictValue=#{dictValue} where dictionaryid=#{dictionaryid}
+    </update>
+</mapper>
+

@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--
+ namespace：必须有值，自定义的唯一字符串
+ 推荐使用：dao 接口的全限定名称
+-->
+<mapper namespace="com.example.demo.dao.IMajorManagerDao">
+
+<!--    <select id="queryMajor" resultType="com.example.demo.entities.MajorEntity" >
+        &lt;!&ndash;查询操作&ndash;&gt;
+        select mid,majorName from major
+    </select>-->
+    <select id="queryMajor" resultType="com.example.demo.entities.MajorEntity" parameterType="java.lang.String">
+        <!--查询操作-->
+        SELECT mid, majorName FROM major WHERE majorName LIKE CONCAT('%', #{keyword}, '%') and mid>=0
+    </select>
+
+    <select id="queryMajorName" resultType="java.lang.String" parameterType="java.lang.String">
+        <!--查询操作-->
+        SELECT majorName FROM major WHERE mid=#{majorid}
+    </select>
+
+    <select id="queryYear" resultType="java.lang.Integer" >
+        <!--查询操作-->
+        SELECT DISTINCT year
+        FROM graduate;
+    </select>
+
+    <select id="queryAllMajor" resultType="com.example.demo.entities.MajorEntity" parameterType="java.lang.String">
+        <!--查询操作-->
+        SELECT mid, majorName FROM major where mid>=0
+    </select>
+
+    <select id="queryMajorIndustry" resultType="com.example.demo.entities.MajorIndustry" parameterType="java.lang.String" >
+        <!--查询操作-->
+        select industry.industryID ,industry.industryName ,major_has_industry.num
+        from major_has_industry,industry
+        where major_has_industry.mid=#{majorid}   and major_has_industry.industryID=industry.industryID
+    </select>
+
+    <select id="queryMajorPlace" resultType="com.example.demo.entities.MajorPlace" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT  place.placeName, SUM(place.number) AS majorNumber
+        FROM  place,major_has_direct
+        WHERE place.directdirectID = major_has_direct.directdirectID  AND major_has_direct.majormid=#{majorid}
+        GROUP BY major_has_direct.majormid, place.placeName
+    </select>
+
+    <select id="queryMajorCompany" resultType="com.example.demo.entities.MajorCompany" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT  company.companyName, SUM(company.number) AS companyNumber
+        FROM  company,major_has_direct
+        WHERE company.directdirectID = major_has_direct.directdirectID  AND major_has_direct.majormid=#{majorid}
+        GROUP BY major_has_direct.majormid, company.companyName
+    </select>
+
+    <select id="queryMajorDirectSalary" resultType="com.example.demo.entities.MajorDirectSalary" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT  direct.directName, direct_avgsalary.Salary
+        FROM  direct,major_has_direct,direct_avgsalary
+        WHERE direct_avgsalary.direct_directID = major_has_direct.directdirectID  AND major_has_direct.majormid=#{majorid} AND direct.directID=major_has_direct.directdirectID
+    </select>
+
+    <select id="queryMajorScale" resultType="com.example.demo.entities.MajorScale" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT  scale.scaledictID, SUM(scale.number) AS number
+        FROM  scale,major_has_direct
+        WHERE scale.direct_directID = major_has_direct.directdirectID  AND major_has_direct.majormid=#{majorid}
+        GROUP BY  scale.scaledictID
+    </select>
+
+    <select id="queryMajorMarket" resultType="com.example.demo.entities.MajorMarket" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT  marketid, num
+        FROM  major_companymarket
+        WHERE majorid=#{majorid}
+
+    </select>
+
+    <select id="queryMajorGraduate" resultType="com.example.demo.entities.MajorGraduateGone" parameterType="java.lang.String" >
+        <!--查询操作-->
+        <!--查询操作-->
+        SELECT
+        SUM(CASE WHEN nali.destinationType_typeID = 1 THEN 1 ELSE 0 END) AS graduateCountID1,
+        SUM(CASE WHEN nali.destinationType_typeID = 2 THEN 1 ELSE 0 END) AS graduateCountID2,
+        SUM(CASE WHEN nali.destinationType_typeID = 3 THEN 1 ELSE 0 END) AS graduateCountID3,
+        major.majorName
+        FROM
+        graduate, major, nali
+        WHERE
+        graduate.major_mid = #{majorid}
+        AND graduate.year = #{year}
+        AND major.mid = #{majorid}
+        AND graduate.where_wid = nali.wid
+        GROUP BY
+        major.majorName;
+
+    </select>
+
+    <select id="queryGraduatePlace" resultType="com.example.demo.entities.GraduatePlace" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT COUNT(graduate.graduateID) AS num,location.city AS place
+        FROM  graduate,nali,location
+        WHERE graduate.where_wid = nali.wid AND graduate.year = #{year} AND nali.location_locationID=location.locationID
+        GROUP BY nali.location_locationID
+
+    </select>
+    <select id="queryIndustryGraduate" resultType="com.example.demo.entities.IndustryGraduate" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT nali.industry AS industryName, COUNT(graduate.graduateID) AS num
+        FROM graduate,nali
+        WHERE  graduate.year=#{year}  and graduate.where_wid = nali.wid
+        GROUP BY nali.industry;
+
+    </select>
+
+    <select id="queryMajorYearSalary" resultType="com.example.demo.entities.MajorSalary" parameterType="java.lang.String" >
+        <!--查询操作-->
+        SELECT  major.majorName,major_avgsalary.salary
+        FROM  major_avgsalary,major
+        WHERE major_avgsalary.major_mid = major.mid  AND major_avgsalary.year=#{year};
+    </select>
+
+
+    <!--添加操作-->
+    <insert id="addMajor" >
+        insert into major(mid,majorName) values(#{mid},#{majorName})
+    </insert>
+
+    <delete id="delMajorAvgSalary">
+        delete from major_avgsalary where major_mid=#{id}
+    </delete>
+
+    <delete id="delMajorHasDirect">
+        delete from major_has_direct where majormid=#{id}
+    </delete>
+
+    <delete id="delMajor">
+        delete from major where mid=#{id}
+    </delete>
+
+
+</mapper>
+
